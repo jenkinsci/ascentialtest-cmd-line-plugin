@@ -1,0 +1,93 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+    <f:entry name="installPath" title="AT Install Path" field="installPath">
+        <f:textbox value="C:\Program Files (x86)\Zeenyx\AscentialTest"/>
+    </f:entry>
+    <f:entry name="projectPath" title="Project Path" field="projectPath">    
+    <f:textbox />
+    </f:entry>
+    <f:entry name="projectName" title="Project Name" field="projectName">
+        <f:textbox />
+    </f:entry>
+    <f:entry name="runType" title="Choose Run Type" field="runType">
+        <select name="runType">
+            <option value=""></option>
+            <f:option value="testset" selected="${instance.runType.equals('testset')? 'true':null}">testset</f:option>
+            <f:option value="suite" selected="${instance.runType.equals('suite')? 'true':null}">suite</f:option>
+            <f:option value="plan" selected="${instance.runType.equals('plan')? 'true':null}">plan</f:option>
+            <f:option value="test" selected="${instance.runType.equals('test')? 'true':null}">test</f:option>
+        </select>
+    </f:entry>
+    <f:entry name="runTypeName" title="Run Type Name" field="runTypeName">
+        <f:textbox />
+    </f:entry>
+
+    <f:block>
+        <div style="margin-left:22px"><h4>For TestSet only: Check the reports to be generated at the conclusion of the run and select configuration options</h4></div>
+    </f:block>
+    
+    <f:entry name="report1" title="TestSetOverview" field="report1">
+        <f:checkbox />
+    </f:entry>
+    <f:entry name="report2" title="TestSetSummary" field="report2">
+        <f:checkbox />
+    </f:entry>
+    <f:entry name="report3" title="TestSetSummaryAttr" field="report3">
+        <f:checkbox />
+    </f:entry>
+    <f:entry name="report4" title="TestSetDetailed" field="report4">
+        <f:checkbox />
+    </f:entry>
+    <f:entry name="exportDir" title="Report Path" field="exportDir">
+        <f:textbox />
+    </f:entry>
+    <f:entry name="reportFormat" title="Report Format" field="reportFormat">
+        <select name="reportFormat">
+            <option value=""></option>
+            <f:option value="excel" selected="${instance.reportFormat.equals('excel')? 'true':null}">excel</f:option>
+            <f:option value="html" selected="${instance.reportFormat.equals('html')? 'true':null}">html</f:option>
+            <f:option value="pdf" selected="${instance.reportFormat.equals('pdf')? 'true':null}">pdf</f:option>
+            <f:option value="rtf" selected="${instance.reportFormat.equals('rtf')? 'true':null}">rtf</f:option>
+            <f:option value="tiff" selected="${instance.reportFormat.equals('tiff')? 'true':null}">tiff</f:option>
+        </select>          
+    </f:entry>
+    <f:entry name="summaryAttribute" title="Summary Attribute" field="summaryAttribute">
+        <f:textbox />
+    </f:entry>
+    <f:entry name="outputLevel" title="Output Level" field="outputLevel">
+        <select name="outputLevel">
+            <option value=""></option>
+            <f:option value="info" selected="${instance.outputLevel.equals('info')? 'true':null}">info</f:option>
+            <f:option value="error" selected="${instance.outputLevel.equals('error')? 'true':null}">error</f:option>
+            <f:option value="trace" selected="${instance.outputLevel.equals('trace')? 'true':null}">trace</f:option>
+        </select>
+    </f:entry>
+    <f:entry name="email" title="Email" field="email">
+        <f:checkbox />
+    </f:entry>
+
+
+    <f:advanced>
+        <f:entry name="checkoutURL" title="Checkout URL" field="checkoutURL">
+            <f:textbox />
+        </f:entry>
+        <f:entry name="checkoutPath" title="Checkout Path" field="checkoutPath">
+            <f:textbox />
+        </f:entry>    
+        <f:entry name="checkoutRev" title="Checkout Revision" field="checkoutRev">
+            <f:textbox />
+        </f:entry>       
+        <f:entry name="runOnlyFailed" title="Run Only Failed Tests" field="runOnlyFailed">
+            <f:checkbox />
+        </f:entry>
+        <f:entry name="queryExpression" title="Query Expression" field="queryExpression">
+            <f:textbox />
+        </f:entry>   
+        <f:entry name="testArgs" title="Test Arguments" field="testArgs">
+            <f:textbox />
+        </f:entry> 
+        <f:entry name="targetComputers" title="Target Computers" field="targetComputers">
+            <f:textbox />
+        </f:entry>
+    </f:advanced>
+</j:jelly>

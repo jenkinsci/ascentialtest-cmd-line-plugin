@@ -19,7 +19,6 @@ import org.kohsuke.stapler.DataBoundSetter;
 import java.util.ArrayList;
 import hudson.util.ArgumentListBuilder;
 import hudson.model.Result;
-import io.jenkins.plugins.sample.Messages;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 import java.io.IOException;
@@ -28,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Scanner;
+import io.jenkins.plugins.ascentialtest.Messages;
 
 
 public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildStep {
@@ -35,7 +35,7 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
     private final String installPath, projectPath, projectName, runTypeName, runType, exportDir, reportFormat, summaryAttribute, outputLevel, checkoutURL, checkoutPath, checkoutRev, queryExpression, testArgs, targetComputers;
     private final boolean email, report1, report2, report3, report4, runOnlyFailed;
     private ArgumentListBuilder ATCommandLine, AtReportsCommandLine1, AtReportsCommandLine2, AtReportsCommandLine3, AtReportsCommandLine4;
-   
+
     @DataBoundConstructor
     public AscentialTestCmdLineBuilder(String installPath, String projectPath, String projectName, String runTypeName, String ATCommandLine, String AtReportsCommandLine, String runType, Boolean report1 , Boolean report2 , Boolean report3 , Boolean report4, String exportDir, String reportFormat, String summaryAttribute, String outputLevel, Boolean email, String checkoutURL, String checkoutPath, String checkoutRev, Boolean runOnlyFailed, String queryExpression, String testArgs, String targetComputers ) {
         this.installPath = installPath;
@@ -60,7 +60,7 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
         this.testArgs = testArgs;
         this.targetComputers = targetComputers;
         }
-   
+
     public String getinstallPath() {
         return installPath;
     }
@@ -139,8 +139,8 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
         }
         else {
             ATCommandLine.add(projectPath+"\\"+projectName+".zProject");
-        }        
-        
+        }
+
         if (queryExpression !=null && !queryExpression.isEmpty()){
             ATCommandLine.add("-query");
             ATCommandLine.add(queryExpression);
@@ -154,22 +154,22 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
 
         if (targetComputers !=null && !targetComputers.isEmpty()){
             ATCommandLine.add("-target");
-            
+
             ATCommandLine.addTokenized(targetComputers);
         }
-                
+
         ATCommandLine.add("-"+runType);
         ATCommandLine.add(runTypeName);
-        
+
         ATCommandLine.add("-runcmd");
-        ATCommandLine.add(workspace+"\\RemoveLocks.cmd");       
+        ATCommandLine.add(workspace+"\\RemoveLocks.cmd");
         return ATCommandLine;
     }
     public ArgumentListBuilder getATCommandLineForRunTypeTest(FilePath workspace) {
         ATCommandLine  = new ArgumentListBuilder();
         ATCommandLine.add("cmd.exe");
         ATCommandLine.add("/c");
-        
+
         ATCommandLine.add("call");
         ATCommandLine.add(installPath+"\\atrun.exe");
         if (checkoutURL !=null &&!checkoutURL.isEmpty()){
@@ -183,20 +183,20 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
         }
         else {
             ATCommandLine.add(projectPath+"\\"+projectName+".zProject");
-        }              
-        
+        }
+
         if (testArgs != null && !testArgs.isEmpty()){
             ATCommandLine.add(testArgs);
         }
-         
+
         if (targetComputers !=null && !targetComputers.isEmpty() ){
-            ATCommandLine.add("-target");            
+            ATCommandLine.add("-target");
             ATCommandLine.addTokenized(targetComputers);
         }
-               
+
         ATCommandLine.add("-"+runType);
         ATCommandLine.add(runTypeName);
-        
+
         ATCommandLine.add(">");
         ATCommandLine.add(workspace+"\\Output.txt");
 
@@ -208,13 +208,13 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
         AtReportsCommandLine1.add("-TestSetName");
          AtReportsCommandLine1.add(runTypeName);
        if (report1) {
-        AtReportsCommandLine1.add("-Report");    
-        AtReportsCommandLine1.add("TestSetOverview");    
-        AtReportsCommandLine1.add("-Export");    
-        AtReportsCommandLine1.add(exportDir+"\\TestSetOverview."+reportFormat);    
-        AtReportsCommandLine1.add("-Format");    
-        AtReportsCommandLine1.add(reportFormat);    
-        } 
+        AtReportsCommandLine1.add("-Report");
+        AtReportsCommandLine1.add("TestSetOverview");
+        AtReportsCommandLine1.add("-Export");
+        AtReportsCommandLine1.add(exportDir+"\\TestSetOverview."+reportFormat);
+        AtReportsCommandLine1.add("-Format");
+        AtReportsCommandLine1.add(reportFormat);
+        }
         if (email) {
         AtReportsCommandLine1.add("-Email");
         }
@@ -226,13 +226,13 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
         AtReportsCommandLine2.add("-TestSetName");
          AtReportsCommandLine2.add(runTypeName);
         if (report2) {
-        AtReportsCommandLine2.add("-Report");    
-        AtReportsCommandLine2.add("TestSetSummary");    
-        AtReportsCommandLine2.add("-Export");    
-        AtReportsCommandLine2.add(exportDir+"\\TestSetSummary."+reportFormat);    
-        AtReportsCommandLine2.add("-Format");    
-        AtReportsCommandLine2.add(reportFormat);    
-        } 
+        AtReportsCommandLine2.add("-Report");
+        AtReportsCommandLine2.add("TestSetSummary");
+        AtReportsCommandLine2.add("-Export");
+        AtReportsCommandLine2.add(exportDir+"\\TestSetSummary."+reportFormat);
+        AtReportsCommandLine2.add("-Format");
+        AtReportsCommandLine2.add(reportFormat);
+        }
         if (email) {
         AtReportsCommandLine2.add("-Email");
         }
@@ -244,15 +244,15 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
         AtReportsCommandLine3.add("-TestSetName");
          AtReportsCommandLine3.add(runTypeName);
         if (report3) {
-        AtReportsCommandLine3.add("-Report");    
-        AtReportsCommandLine3.add("TestSetSummaryAttr");    
-        AtReportsCommandLine3.add("-SummaryAttr");    
-        AtReportsCommandLine3.add(summaryAttribute);    
-        AtReportsCommandLine3.add("-Export");    
-        AtReportsCommandLine3.add(exportDir+"\\TestSetSummaryAttr."+reportFormat);    
-        AtReportsCommandLine3.add("-Format");    
-        AtReportsCommandLine3.add(reportFormat);    
-        } 
+        AtReportsCommandLine3.add("-Report");
+        AtReportsCommandLine3.add("TestSetSummaryAttr");
+        AtReportsCommandLine3.add("-SummaryAttr");
+        AtReportsCommandLine3.add(summaryAttribute);
+        AtReportsCommandLine3.add("-Export");
+        AtReportsCommandLine3.add(exportDir+"\\TestSetSummaryAttr."+reportFormat);
+        AtReportsCommandLine3.add("-Format");
+        AtReportsCommandLine3.add(reportFormat);
+        }
         if (email) {
         AtReportsCommandLine3.add("-Email");
         }
@@ -264,15 +264,15 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
         AtReportsCommandLine4.add("-TestSetName");
          AtReportsCommandLine4.add(runTypeName);
         if (report4) {
-        AtReportsCommandLine4.add("-Report");    
-        AtReportsCommandLine4.add("TestSetDetailed");    
-        AtReportsCommandLine4.add("-OutputLevel");    
-        AtReportsCommandLine4.add(outputLevel);    
-        AtReportsCommandLine4.add("-Export");    
-        AtReportsCommandLine4.add(exportDir+"\\TestSetDetailed."+reportFormat);    
-        AtReportsCommandLine4.add("-Format");    
-        AtReportsCommandLine4.add(reportFormat);    
-        } 
+        AtReportsCommandLine4.add("-Report");
+        AtReportsCommandLine4.add("TestSetDetailed");
+        AtReportsCommandLine4.add("-OutputLevel");
+        AtReportsCommandLine4.add(outputLevel);
+        AtReportsCommandLine4.add("-Export");
+        AtReportsCommandLine4.add(exportDir+"\\TestSetDetailed."+reportFormat);
+        AtReportsCommandLine4.add("-Format");
+        AtReportsCommandLine4.add(reportFormat);
+        }
         if (email) {
         AtReportsCommandLine4.add("-Email");
         }
@@ -283,16 +283,16 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
 
     @Override
     public void perform(Run<?, ?> run, FilePath workspace, Launcher launcher, TaskListener listener) throws InterruptedException, IOException {
-        
+
         EnvVars envVars;
         envVars = run.getEnvironment(listener);
         envVars.put("WORKSPACE", workspace.toString());
         ///*toString*/envVars.put("RUN",run.toString());
         String buildURL = run.getUrl();
-        
+
         if (runType.equals("testset")){
             CreateLockFile (workspace, buildURL);
-               
+
             ArgumentListBuilder CmdArgs = new ArgumentListBuilder();
             CmdArgs.add("cmd.exe");
             CmdArgs.add("/c");
@@ -327,48 +327,48 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
                 TimeUnit.SECONDS.sleep(10);
             }
         }
-               
+
         if (runType.equals("testset")){
-            if (report1) {    
+            if (report1) {
             launcher.launch().cmds(getAtReports1CommandLine()).stdout(listener).join();
             }
-            
-            if (report2) {    
+
+            if (report2) {
             launcher.launch().cmds(getAtReports2CommandLine()).stdout(listener).join();
             }
 
-            if (report3) {    
+            if (report3) {
             launcher.launch().cmds(getAtReports3CommandLine()).stdout(listener).join();
             }
 
-            if (report4) {    
+            if (report4) {
             launcher.launch().cmds(getAtReports4CommandLine()).stdout(listener).join();
             }
         }
 
         if (runType.equals("testset")){
             File FailLockFile = new File(workspace+"\\fail.lock");
-            boolean bFailFileExists = FailLockFile.exists();       
+            boolean bFailFileExists = FailLockFile.exists();
             if (bFailFileExists){
-                run.setResult(Result.FAILURE);               
-            } 
+                run.setResult(Result.FAILURE);
+            }
         }
 
         if (runType.equals("test")){
               ArrayList<String> OutputList = new ArrayList<String>();
               try {
                 Scanner TestOutputFile = new Scanner(new File(workspace+"\\Output.txt"), "UTF-8");
-                
-                while (TestOutputFile.hasNextLine()){       
-                    OutputList.add(TestOutputFile.nextLine());             
+
+                while (TestOutputFile.hasNextLine()){
+                    OutputList.add(TestOutputFile.nextLine());
                 }
-                TestOutputFile.close();          
+                TestOutputFile.close();
                }
                 catch(Exception e){
                    System.out.println("Exception occurred");
                    e.printStackTrace();
                 }
-                                             
+
             ArgumentListBuilder CmdArgs = new ArgumentListBuilder();
             CmdArgs.add("cmd.exe");
             CmdArgs.add("/c");
@@ -388,7 +388,7 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
             CmdArgs.addTokenized(OutputList.get(4));
 
             launcher.launch().cmds(CmdArgs).stdout(listener).join();
-            
+
             if (!OutputList.get(3).equals("NumErrors: 0")){
                 run.setResult(Result.FAILURE);
             }
@@ -408,12 +408,12 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
            System.out.println("Exception occurred");
     	   e.printStackTrace();
         }
-           
+
         try {
         File LockFile = new File(workspace+"\\RemoveLocks.cmd");
         if (LockFile.createNewFile()) {
             System.out.println("File created: " + LockFile.getName());
-        
+
             Writer w = new OutputStreamWriter(new FileOutputStream(LockFile), "UTF-8");
             BufferedWriter writer = new BufferedWriter(w);
 
@@ -435,13 +435,13 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
             writer.append("\n");
             writer.append(">> \""+workspace+"\\ATNotRun.properties\" echo YVALUE=%NumNotRun%");
             writer.append("\n");
-            writer.append(">> \""+workspace+"\\ATNotRun.properties\" echo URL="+BUILD_URL+"NumNotRun");           
+            writer.append(">> \""+workspace+"\\ATNotRun.properties\" echo URL="+BUILD_URL+"NumNotRun");
             writer.close();
-        } 
+        }
         else {
         System.out.println("File already exists.");
         }
-      } 
+      }
       catch (IOException e) {
         System.out.println("An error occurred.");
         e.printStackTrace();
@@ -456,25 +456,25 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
         public FormValidation doCheckInstallPath(@QueryParameter String value)
                 throws IOException, ServletException {
             if (value.length() == 0)
-                return FormValidation.error(Messages.HelloWorldBuilder_DescriptorImpl_errors_missingName());          
+                return FormValidation.error(Messages.HelloWorldBuilder_DescriptorImpl_errors_missingName());
             return FormValidation.ok();
         }
         public FormValidation doCheckProjectPath(@QueryParameter String value)
                 throws IOException, ServletException {
             if (value.length() == 0)
-                return FormValidation.error(Messages.HelloWorldBuilder_DescriptorImpl_errors_missingName());          
+                return FormValidation.error(Messages.HelloWorldBuilder_DescriptorImpl_errors_missingName());
             return FormValidation.ok();
         }
         public FormValidation doCheckProjectName(@QueryParameter String value)
                 throws IOException, ServletException {
             if (value.length() == 0)
-                return FormValidation.error(Messages.HelloWorldBuilder_DescriptorImpl_errors_missingName());          
+                return FormValidation.error(Messages.HelloWorldBuilder_DescriptorImpl_errors_missingName());
             return FormValidation.ok();
         }
         public FormValidation doCheckRunTypeName(@QueryParameter String value)
                 throws IOException, ServletException {
             if (value.length() == 0)
-                return FormValidation.error(Messages.HelloWorldBuilder_DescriptorImpl_errors_missingName());          
+                return FormValidation.error(Messages.HelloWorldBuilder_DescriptorImpl_errors_missingName());
             return FormValidation.ok();
         }
         /*public ListBoxModel doFillRunTypeItems() {
@@ -484,8 +484,8 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
             items.add("plan", "plan");
             items.add("test", "test");
             return items;
-        }*/             
-        
+        }*/
+
         @Override
         public boolean isApplicable(Class<? extends AbstractProject> aClass) {
             return true;
@@ -495,6 +495,6 @@ public class AscentialTestCmdLineBuilder extends Builder implements SimpleBuildS
         public String getDisplayName() {
             return Messages.HelloWorldBuilder_DescriptorImpl_DisplayName();
         }
-                
+
     }
 }

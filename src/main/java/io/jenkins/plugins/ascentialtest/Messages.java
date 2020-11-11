@@ -26,18 +26,20 @@ public class Messages {
     private final static ResourceBundleHolder holder = ResourceBundleHolder.get(Messages.class);
 
     /**
-     * Key {@code HelloWorldBuilder.DescriptorImpl.errors.missingName}:
+     * Key {@code AscentialTestBuilder.DescriptorImpl.errors.missingName}:
+
      * {@code Required field}.
      * 
      * @return
      *     {@code Required field}
      */
-    public static String HelloWorldBuilder_DescriptorImpl_errors_missingName() {
-        return holder.format("HelloWorldBuilder.DescriptorImpl.errors.missingName");
+    public static String AscentialTestBuilder_DescriptorImpl_errors_missingName() {
+        return "Please enter value for required field";
     }
 
     /**
-     * Key {@code HelloWorldBuilder.DescriptorImpl.errors.missingName}:
+     * Key {@code AscentialTestBuilder.DescriptorImpl.errors.missingName}:
+
      * {@code Required field}.
      * 
      * @return
@@ -47,70 +49,15 @@ public class Messages {
         return new Localizable(holder, "HelloWorldBuilder.DescriptorImpl.errors.missingName");
     }
 
-    /**
-     * Key {@code HelloWorldBuilder.DescriptorImpl.warnings.reallyFrench}:
-     * {@code Are you actually French?}.
-     * 
-     * @return
-     *     {@code Are you actually French?}
-     */
-    public static String HelloWorldBuilder_DescriptorImpl_warnings_reallyFrench() {
-        return holder.format("HelloWorldBuilder.DescriptorImpl.warnings.reallyFrench");
-    }
 
-    /**
-     * Key {@code HelloWorldBuilder.DescriptorImpl.warnings.reallyFrench}:
-     * {@code Are you actually French?}.
-     * 
-     * @return
-     *     {@code Are you actually French?}
-     */
-    public static Localizable _HelloWorldBuilder_DescriptorImpl_warnings_reallyFrench() {
-        return new Localizable(holder, "HelloWorldBuilder.DescriptorImpl.warnings.reallyFrench");
-    }
+    static class AscentialTestCmdLineBuilder {
 
-    /**
-     * Key {@code HelloWorldBuilder.DescriptorImpl.warnings.tooShort}: {@code
-     * Isn't the name too short?}.
-     * 
-     * @return
-     *     {@code Isn't the name too short?}
-     */
-    public static String HelloWorldBuilder_DescriptorImpl_warnings_tooShort() {
-        return holder.format("HelloWorldBuilder.DescriptorImpl.warnings.tooShort");
-    }
+        static String DescriptorImpl_DisplayName() {
+            return "AscentialTest Command Line Builder";
+        }
 
-    /**
-     * Key {@code HelloWorldBuilder.DescriptorImpl.warnings.tooShort}: {@code
-     * Isn't the name too short?}.
-     * 
-     * @return
-     *     {@code Isn't the name too short?}
-     */
-    public static Localizable _HelloWorldBuilder_DescriptorImpl_warnings_tooShort() {
-        return new Localizable(holder, "HelloWorldBuilder.DescriptorImpl.warnings.tooShort");
-    }
-
-    /**
-     * Key {@code HelloWorldBuilder.DescriptorImpl.DisplayName}: {@code
-     * AscentialTest Command Line Builder}.
-     * 
-     * @return
-     *     {@code AscentialTest Command Line Builder}
-     */
-    public static String HelloWorldBuilder_DescriptorImpl_DisplayName() {
-        return holder.format("HelloWorldBuilder.DescriptorImpl.DisplayName");
-    }
-
-    /**
-     * Key {@code HelloWorldBuilder.DescriptorImpl.DisplayName}: {@code
-     * AscentialTest Command Line Builder}.
-     * 
-     * @return
-     *     {@code AscentialTest Command Line Builder}
-     */
-    public static Localizable _HelloWorldBuilder_DescriptorImpl_DisplayName() {
-        return new Localizable(holder, "HelloWorldBuilder.DescriptorImpl.DisplayName");
+        public AscentialTestCmdLineBuilder() {
+        }
     }
 
 }
